@@ -231,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.all(8),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.75,
+        childAspectRatio: 0.7,
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
       ),
@@ -244,17 +244,50 @@ class _HomeScreenState extends State<HomeScreen> {
           child: InkWell(
             onTap: () => _navigateToDetail(product),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Image.network(product.imageUrl, fit: BoxFit.cover, errorBuilder: (c, e, s) => const Icon(Icons.error)),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.network(
+                        product.imageUrl, 
+                        fit: BoxFit.cover, 
+                        errorBuilder: (c, e, s) => const Icon(Icons.error)
+                      ),
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: CircleAvatar(
+                          radius: 16,
+                          backgroundImage: NetworkImage(getMarketLogo(product.market)),
+                          backgroundColor: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(product.name, style: Theme.of(context).textTheme.titleMedium, overflow: TextOverflow.ellipsis),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.name, 
+                        style: Theme.of(context).textTheme.titleMedium, 
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        product.market.name, 
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0).copyWith(bottom: 8.0),
                   child: product.discountPrice != null
                       ? Wrap( 
                           spacing: 8.0,

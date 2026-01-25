@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-        cardTheme: CardTheme(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+        cardTheme: CardThemeData(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
       ),
       home: const HomeScreen(),
     );
@@ -204,13 +204,13 @@ class _HomeScreenState extends State<HomeScreen> {
       icon: Icon(
         _displayMode == DisplayMode.card ? Icons.view_module
         : _displayMode == DisplayMode.list ? Icons.view_list
-        : Icons.view_table,
+        : Icons.table_chart,
       ),
       onSelected: _changeDisplayMode,
       itemBuilder: (BuildContext context) => <PopupMenuEntry<DisplayMode>>[
         const PopupMenuItem(value: DisplayMode.card, child: ListTile(leading: Icon(Icons.view_module), title: Text('Cards'))),
         const PopupMenuItem(value: DisplayMode.list, child: ListTile(leading: Icon(Icons.view_list), title: Text('List'))),
-        const PopupMenuItem(value: DisplayMode.table, child: ListTile(leading: Icon(Icons.view_table), title: Text('Table'))),
+        const PopupMenuItem(value: DisplayMode.table, child: ListTile(leading: Icon(Icons.table_chart), title: Text('Table'))),
       ],
     );
   }

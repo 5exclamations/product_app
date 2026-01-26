@@ -44,6 +44,24 @@ class Product {
 }
 
 // MOCK DATA
+
+// Markets
+const ravoMarket = Market(id: 1, name: 'Ravo', logoUrl: 'https://i.ibb.co/6yYQfCQ/ravo.png');
+const arazMarket = Market(id: 2, name: 'Araz', logoUrl: 'https://i.ibb.co/3k0421h/araz.png');
+const obaMarket = Market(id: 3, name: 'Oba', logoUrl: 'https://i.ibb.co/7jW1bVv/oba.png');
+
+final List<Market> allMarkets = [ravoMarket, arazMarket, obaMarket];
+
+// Categories
+const dairyCategory = Category(id: 1, name: 'Dairy');
+const bakeryCategory = Category(id: 2, name: 'Bakery');
+const meatCategory = Category(id: 3, name: 'Meat');
+const produceCategory = Category(id: 4, name: 'Produce');
+const pantryCategory = Category(id: 5, name: 'Pantry');
+
+final List<Category> allCategories = [dairyCategory, bakeryCategory, meatCategory, produceCategory, pantryCategory];
+
+
 final List<Product> allProducts = [
   // Ravo
   Product(name: 'Milk', price: 1.50, discountPrice: 1.35, market: Market.ravo, category: Category.dairy, weight: '1L', description: 'Fresh cow milk, pasteurized.', imageUrl: 'https://i.ibb.co/g9f2sWv/milk.png'),

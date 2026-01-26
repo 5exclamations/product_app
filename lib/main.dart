@@ -6,6 +6,21 @@ enum Category { dairy, bakery, meat, produce, pantry }
 enum DisplayMode { card, list, table }
 
 // DATA MODELS
+class Market {
+  final int id;
+  final String name;
+  final String logoUrl;
+
+  const Market({required this.id, required this.name, required this.logoUrl});
+}
+
+class Category {
+  final int id;
+  final String name;
+
+  const Category({required this.id, required this.name});
+}
+
 class Product {
   final String name;
   final double price;

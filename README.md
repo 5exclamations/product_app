@@ -102,3 +102,9 @@ Getting started
 
 
 
+  Backend API used by this app: https://github.com/5exclamations/api_for_app
+
+  This Flutter client consumes the API endpoints for markets, categories, and products.
+
+
+

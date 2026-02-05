@@ -1,16 +1,104 @@
-# products_app
+<div align="center">
 
-A new Flutter project.
 
-## Getting Started
+# Market Price Tracker
 
-This project is a starting point for a Flutter application.
+Flutter app that helps users browse and compare product prices across markets with search, filters, discount view, sorting, theming, and multilingual UI (EN/RU/AZ).
 
-A few resources to get you started if this is your first Flutter project:
+<a href="https://github.com/5exclamations/product_app">
+  <img src="https://img.shields.io/badge/Flutter-App-02569B?logo=flutter&logoColor=white" alt="Flutter Badge" />
+</a>
+<img src="https://img.shields.io/badge/Dart-2%2B-0175C2?logo=dart&logoColor=white" alt="Dart Badge" />
+<img src="https://img.shields.io/badge/State-Provider-5A2D82" alt="Provider Badge" />
+<img src="https://img.shields.io/badge/API-REST-111827" alt="REST Badge" />
+<img src="https://img.shields.io/badge/i18n-EN%20%7C%20RU%20%7C%20AZ-0F766E" alt="i18n Badge" />
+<img src="https://img.shields.io/badge/UI-Material%203-6D28D9" alt="Material 3 Badge" />
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+</div>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+<!--
+## Preview
+
+
+<p align="center">
+  <img src="assets/screenshots/home.png" height="420" alt="Home screen" />
+  <img src="assets/screenshots/filters.png" height="420" alt="Filters & sorting" />
+  <img src="assets/screenshots/product.png" height="420" alt="Product details" />
+</p>
+-->
+
+## What this app does
+
+- Browse markets and categories.
+- Fetch products from a REST API with query filters:
+  - `search`
+  - `category_id`
+  - `market_id`
+  - `on_discount=true`
+  - `sort_by=price|name|discount`
+  - `sort_order=asc|desc`
+- Show discounts and compute discount percentage on the client.
+- Persist user preferences:
+  - Theme mode: system / light / dark.
+  - Locale: English / Russian / Azerbaijani.
+
+## Tech stack
+
+- Flutter.
+- State management: `provider` (ChangeNotifier + Consumer).
+- Networking: `http`.
+- Local persistence: `shared_preferences`.
+- Localization: `flutter_localizations` + `AppLocalizationsDelegate`.
+
+## Architecture (high-level)
+
+```text
+UI (screens/widgets)
+   ↓
+SettingsProvider (theme + locale)  ← persisted in SharedPreferences
+   ↓
+ApiService (HTTP client)
+   ↓
+DTO models (Market / Category / Product)
+   ↓
+Backend REST API
+```
+API endpoint
+
+Base URL:
+
+```text
+https://api-for-app-r444.onrender.com/api/v1
+```
+Routes used by the app:
+
+    GET /markets/
+
+    GET /categories/
+
+    GET /products/ (supports filtering & sorting via query parameters)
+
+Example:
+
+```text
+GET /products/?search=milk&market_id=1&on_discount=true&sort_by=price&sort_order=asc
+```
+Getting started
+
+    Install Flutter SDK.
+
+    Fetch dependencies:
+
+    bash
+    flutter pub get
+
+    Run:
+
+    bash
+    flutter run
+
+    If you use a different backend, update baseUrl in ApiService.
+
+
+

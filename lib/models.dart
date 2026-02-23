@@ -17,11 +17,16 @@ class Market {
 class Category {
   final int id;
   final String name;
+  final String? icon;  // ← Новое поле
 
-  const Category({required this.id, required this.name});
+  const Category({required this.id, required this.name, this.icon});
 
   factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(id: json['id'], name: json['name']);
+    return Category(
+      id: json['id'],
+      name: json['name'],
+      icon: json['icon'],
+    );
   }
 }
 
@@ -61,4 +66,10 @@ class Product {
       description: json['description'],
     );
   }
+
+  // Полезные геттеры
+  bool get hasDiscount => discountPrice != null;
+  double get discountPercentage => hasDiscount
+      ? ((price - discountPrice!) / price * 100)
+      : 0;
 }

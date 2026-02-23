@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'models.dart';
-const String baseUrl = "https://api-for-app-r444.onrender.com/api/v1"; // Для Android эмулятора
-// const String baseUrl = "http://localhost:8000/api/v1"; // Для iOS симулятора
-// const String baseUrl = "http://YOUR_IP:8000/api/v1"; // Для реального устройства
+
+const String baseUrl = "https://api-for-app-r444.onrender.com/api/v1";
 
 class ApiService {
   // Получить все магазины
@@ -28,11 +27,23 @@ class ApiService {
     }
   }
 
-  // Получить продукты с фильтрами
-  static Future<List<Product>> fetchProducts({String? search, int? categoryId}) async {
+  // Получить продукты с фильтрами и сортировкой
+  static Future<List<Product>> fetchProducts({
+    String? search,
+    int? categoryId,
+    int? marketId,
+    bool? onDiscount,
+    String? sortBy,  // "price", "name", "discount"
+    String? sortOrder,  // "asc", "desc"
+  }) async {
     var url = '$baseUrl/products/?';
+
     if (search != null && search.isNotEmpty) url += 'search=$search&';
-    if (categoryId != null) url += 'category_id=$categoryId';
+    if (categoryId != null) url += 'category_id=$categoryId&';
+    if (marketId != null) url += 'market_id=$marketId&';
+    if (onDiscount != null && onDiscount) url += 'on_discount=true&';
+    if (sortBy != null) url += 'sort_by=$sortBy&';
+    if (sortOrder != null) url += 'sort_order=$sortOrder&';
 
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
